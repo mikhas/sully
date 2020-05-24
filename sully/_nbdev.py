@@ -2,9 +2,10 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"columnSizeNotNa": "00_eda.ipynb",
+         "findCategoricalCandidates": "00_eda.ipynb"}
 
-modules = []
+modules = ["eda.py"]
 
 doc_url = "https://mikhas.github.io/sully/"
 

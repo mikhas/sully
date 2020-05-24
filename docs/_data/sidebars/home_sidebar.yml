@@ -10,8 +10,8 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: module name here
-      url: /core
+      title: Exploratory Data Analysis
+      url: /eda
     output: web
     title: sully
   output: web
