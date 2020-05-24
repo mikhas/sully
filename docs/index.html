@@ -1,12 +1,12 @@
 ---
 
-title: Project name here
+title: Sully
 
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Summary description here."
-description: "Summary description here."
+summary: "Exploratory Data Analysis (EDA) on <a href='https://en.wikipedia.org/wiki/US_Airways_Flight_1549'>bird strikes in aviation](https://www.kaggle.com/breana/bird-strikes). The project's name is a reference to the [Miracle on the Hudson on January 15, 2009</a>."
+description: "Exploratory Data Analysis (EDA) on <a href='https://en.wikipedia.org/wiki/US_Airways_Flight_1549'>bird strikes in aviation](https://www.kaggle.com/breana/bird-strikes). The project's name is a reference to the [Miracle on the Hudson on January 15, 2009</a>."
 ---
 <!--
 
@@ -29,74 +29,26 @@ description: "Summary description here."
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This file will become your README and also the index of your documentation.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Install">Install<a class="anchor-link" href="#Install"> </a></h2><ol>
-<li>Make a conda env with nbdev installed in it.</li>
-<li>Activate that env and run nbdev <code>&lt;project_name&gt;</code>. This will create a git-initialized repo with <code>$PWD/&lt;project_name&gt;</code>.</li>
+<li>Make a conda env <a href="https://nbdev.fast.ai/">with nbdev installed</a> in it.</li>
+<li>Activate that env and run <code>nbdev_new &lt;project_name&gt;</code>. This will create a git-initialized repo with <code>$PWD/&lt;project_name&gt;</code>.</li>
 <li>Run <code>nbdev_install_git_hooks</code>.</li>
 <li>Run <code>nbdev_build_lib</code>. This will create a Makefile on its first run.</li>
+<li>Modify <code>settings.ini</code> to reflect your github setup. You also specify your project's dependencies here for the github CI pipeline. </li>
 <li><code>make docs_serve</code> – This will most likely fail on your first run, as it tries to use Jekyll locally similarily on how it will later look using github pages.<ol>
 <li>Goto docs directory inside <code>&lt;project_name&gt;</code>.</li>
 <li><code>bundle install --path ~/.local/&lt;project_name&gt;-docs</code> – This is only needed to serve the documentation locally! It pulls in a lot of ruby stuff.</li>
 </ol>
 </li>
+<li>Save your notebooks and <strong>run <code>make all</code> before each <code>git {add, commit}</code></strong> – this might feel strange but the artifacts created by <code>make</code> are part of your project's git repository. This is intentional!</li>
+<li>Push to github to check that CI runs successfully! Fix any build failures in this early stage before adding new stuff. Simulating github CI locally is possible but requires docker and an ungodly amount of npm stuff (read: security nightmare).</li>
+<li>After your first push to github configure the github settings for your repository to enable github pages; point them to <code>branch: master, directory: docs/</code>. It can take up to 15min to build your github pages initially.</li>
+<li>Goto <code>https://&lt;github_username&gt;.github.io/&lt;project_name&gt;/</code>. If you installed/configured everything correctly this should show your project's <code>index.ipynb</code> as landing page.</li>
 </ol>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-to-use">How to use<a class="anchor-link" href="#How-to-use"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Fill me in please! Don't forget code examples:</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>2</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 </div>
  
 
