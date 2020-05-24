@@ -1,5 +1,5 @@
 # Sully
-> Exploratory Data Analysis (EDA) on <a href='https://en.wikipedia.org/wiki/US_Airways_Flight_1549'>bird strikes in aviation](https://www.kaggle.com/breana/bird-strikes). The project's name is a reference to the [Miracle on the Hudson on January 15, 2009</a>.
+> Exploratory Data Analysis (EDA) on bird strikes in aviation.
 
 
 ## Install
@@ -15,3 +15,17 @@
 8. Push to github to check that CI runs successfully! Fix any build failures in this early stage before adding new stuff. Simulating github CI locally is possible but requires docker and an ungodly amount of npm stuff (read: security nightmare).
 9. After your first push to github configure the github settings for your repository to enable github pages; point them to `branch: master, directory: docs/`. It can take up to 15min to build your github pages initially.
 10. Goto `https://<github_username>.github.io/<project_name>/`. If you installed/configured everything correctly this should show your project's `index.ipynb` as landing page.
+
+## How to use
+
+Each notebook is transpiled to one web page. Code cells that are marked with `#export` become part of your project's library (or module). This enables you to A) reuse code in other notebooks, B) run your analysis from CLI, without Jupyter.
+
+The first markdown cell of each notebook is treated special by nbdev; it contains the (only) first level headline followed by a brief section describing the notebooks contents like so:
+
+~~~
+# Awesome Notebook Does Amazing Things Only Ever Done A Million Times Before
+
+> This is an exec summary of your notebook. Keep it brief and to the point.
+~~~
+
+If you care about a proper project website, you'll need to do this for each of your project's notebooks! The first level headline of each notebook is used to create the sidebar menu. Proper headline structuring and nesting is recommended once the headlines pile up, as the `make docs` functionality will automagically create a TOC for your notebook. 
