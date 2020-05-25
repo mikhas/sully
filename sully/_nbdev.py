@@ -2,8 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"columnSizeNotNa": "00_eda.ipynb",
-         "findCategoricalCandidates": "00_eda.ipynb"}
+index = {"load": "00_eda.ipynb",
+         "findCategoricalCandidates": "00_eda.ipynb",
+         "categoricalTally": "00_eda.ipynb"}
 
 modules = ["eda.py"]
 
