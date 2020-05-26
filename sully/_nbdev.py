@@ -4,7 +4,9 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"load": "00_eda.ipynb",
          "findCategoricalCandidates": "00_eda.ipynb",
-         "categoricalTally": "00_eda.ipynb"}
+         "categoricalTally": "00_eda.ipynb",
+         "timeOfDay": "00_eda.ipynb",
+         "makeCatCodes": "00_eda.ipynb"}
 
 modules = ["eda.py"]
 
