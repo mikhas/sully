@@ -2,13 +2,17 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"load": "00_eda.ipynb",
+index = {"extract": "00_eda.ipynb",
          "findCategoricalCandidates": "00_eda.ipynb",
          "categoricalTally": "00_eda.ipynb",
          "timeOfDay": "00_eda.ipynb",
-         "makeCatCodes": "00_eda.ipynb"}
+         "filename": "00_eda.ipynb",
+         "save": "00_eda.ipynb",
+         "load": "00_eda.ipynb",
+         "makeCatCodes": "01_analysis.ipynb"}
 
-modules = ["eda.py"]
+modules = ["eda.py",
+           "analysis.py"]
 
 doc_url = "https://mikhas.github.io/sully/"
 

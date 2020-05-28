@@ -1,6 +1,7 @@
 {
   "sully": {
     "Overview": "/",
-    "Exploratory Data Analysis": "/eda"
+    "Exploratory Data Analysis": "/eda",
+    "Analysis & Visualization": "/analysis"
   }
 }

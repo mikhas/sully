@@ -12,6 +12,9 @@ entries:
     - output: web,pdf
       title: Exploratory Data Analysis
       url: /eda
+    - output: web,pdf
+      title: Analysis & Visualization
+      url: /analysis
     output: web
     title: sully
   output: web
