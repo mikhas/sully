@@ -1133,7 +1133,8 @@ memory usage: 11.5+ MB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We don't want the FAA's own record id to be accidentally used for correlation analysis, so we exclude the column by making it the dataset's index. Obviously, this will only work once, so we check for the index' name, in case we run this code cell again. There are a couple missing record ids, so we fix them too (albeit very inefficiently).</p>
+<p>We don't want the FAA's own record id to be accidentally used for correlation analysis, so we exclude the column by making it the dataset's index. The much easier fix would be to drop the column but that just feels wrong.</p>
+<p>There are a couple missing record indices, so we'd expect <code>pd.DataFrame.set_index</code> to fail but pandas doesn't require the index to be unique. This can become problematic once you try to use data exchange formats such as <code>feather</code>. We fill up the missing indices with negative values. That way, we can still differentiate between original and synthetic record indices.</p>
 
 </div>
 </div>
@@ -1145,10 +1146,17 @@ memory usage: 11.5+ MB
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;Record ID&#39;</span><span class="p">:</span>
-    <span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Record ID&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">negativeCounter</span><span class="p">(</span><span class="n">start</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">start</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">count</span>
+        <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
 
+<span class="n">nc</span> <span class="o">=</span> <span class="n">negativeCounter</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;Record ID&#39;</span><span class="p">:</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Record ID&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">next</span><span class="p">(</span><span class="n">nc</span><span class="p">)</span> <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span>
 
 <span class="n">data</span><span class="o">.</span><span class="n">index</span>
 </pre></div>
@@ -1166,9 +1174,9 @@ memory usage: 11.5+ MB
 
 <div class="output_text output_subarea output_execute_result">
 <pre>Int64Index([227413, 226578, 268383, 229514, 225661, 230694, 234288, 231042,
-            322936, 233011,
+                -1, 233011,
             ...
-            322936, 322936, 322936, 319982, 319981, 319591, 319983, 319593,
+             -5987,  -5988,  -5989, 319982, 319981, 319591, 319983, 319593,
             319589, 319594],
            dtype=&#39;int64&#39;, name=&#39;Record ID&#39;, length=65610)</pre>
 </div>
